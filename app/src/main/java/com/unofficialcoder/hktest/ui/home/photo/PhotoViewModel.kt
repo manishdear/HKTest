@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.unofficialcoder.hktest.data.local.DatabaseService
 import com.unofficialcoder.hktest.data.model.Photo
+import com.unofficialcoder.hktest.data.model.Post
 import com.unofficialcoder.hktest.data.remote.NetworkService
 import com.unofficialcoder.hktest.data.repository.PhotoRepository
 import com.unofficialcoder.hktest.ui.base.BaseItemViewModel
@@ -28,23 +29,30 @@ class PhotoViewModel(
     fun getDummies(): LiveData<List<Photo>> = photoLivedata
 
     override fun onCreate() {
-        if (checkInternetConnectionWithMessage()) {
-            photoLoading.postValue(true)
-            compositeDisposable.add(
-                dummyRepository.fetchPhoto()
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(
-                        {
-                            photoLivedata.postValue(it)
-                            photoLoading.postValue(false)
-                        },
-                        {
-                            Log.d("photo call error", it.toString())
-                            photoLoading.postValue(false)
-                        })
-            )
-        }
+//        if (checkInternetConnectionWithMessage()) {
+//            photoLoading.postValue(true)
+//            compositeDisposable.add(
+//                dummyRepository.fetchPhoto()
+//                    .subscribeOn(Schedulers.io())
+//                    .subscribe(
+//                        {
+//                            photoLivedata.postValue(it)
+//                            photoLoading.postValue(false)
+//                        },
+//                        {
+//                            Log.d("photo call error", it.toString())
+//                            photoLoading.postValue(false)
+//                        })
+//            )
+//        }
     }
 
+    fun postData(post: ArrayList<Photo>){
+        photoLivedata.postValue(post)
+    }
+
+    fun postStatus(status: Boolean){
+        photoLoading.postValue(status)
+    }
 
 }

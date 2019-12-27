@@ -23,22 +23,30 @@ class PostViewModel(
     fun getDummies(): LiveData<List<Post>> = postLivedata
 
     override fun onCreate() {
-        if (checkInternetConnectionWithMessage()) {
-            postLoading.postValue(true)
-            compositeDisposable.add(
-                postRepository.fetchPost()
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(
-                        {
-                            postLivedata.postValue(it)
-                            postLoading.postValue(false)
-                        },
-                        {
-                            Log.d("photo call error", it.toString())
-                            postLoading.postValue(false)
-                        })
-            )
-        }
+//        if (checkInternetConnectionWithMessage()) {
+//            postLoading.postValue(true)
+//            compositeDisposable.add(
+//                postRepository.fetchPost()
+//                    .subscribeOn(Schedulers.io())
+//                    .subscribe(
+//                        {
+//                            postLivedata.postValue(it)
+//                            postLoading.postValue(false)
+//                        },
+//                        {
+//                            Log.d("photo call error", it.toString())
+//                            postLoading.postValue(false)
+//                        })
+//            )
+//        }
+    }
+
+    fun postData(post: ArrayList<Post>){
+        postLivedata.postValue(post)
+    }
+
+    fun postStatus(status: Boolean){
+        postLoading.postValue(status)
     }
 
 

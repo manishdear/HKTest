@@ -19,8 +19,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -62,4 +61,7 @@ dependencies {
     // Image
     implementation "com.github.bumptech.glide:glide:4.8.0"
     kapt "com.github.bumptech.glide:compiler:4.8.0"
+
+    //Volley
+    implementation 'com.android.volley:volley:1.1.1'
 }

@@ -3,6 +3,7 @@ package com.unofficialcoder.hktest.ui.home.photo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.unofficialcoder.hktest.data.model.Photo
 import com.unofficialcoder.hktest.ui.base.BaseItemViewModel
@@ -28,6 +29,8 @@ class PhotoItemViewModel @Inject constructor(
     val url: LiveData<String?> = Transformations.map(data) {
         it.imageUrl }
 
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
+
     fun onItemClick(position: Int) {
         messageString.postValue("onItemClick at $position of ")
         Log.d(TAG, "onItemClick at $position")
@@ -37,5 +40,8 @@ class PhotoItemViewModel @Inject constructor(
         Log.d(TAG, "onCreate called")
     }
 
+    fun postStatus(status: Boolean){
+        loading.postValue(status)
+    }
 
 }
